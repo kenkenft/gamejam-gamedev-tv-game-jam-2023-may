@@ -218,7 +218,7 @@ GameObject:
   - component: {fileID: 1214724018}
   - component: {fileID: 1214724017}
   - component: {fileID: 1214724016}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,6 +358,26 @@ PrefabInstance:
       propertyPath: PlayerRig
       value: 
       objectReference: {fileID: 2076900187}
+    - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: _playerJump
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: _jumpVelDecayLow
+      value: 2.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: _jumpVelDecayHigh
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: _speedDecayMultiplier
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: GroundLayerMask.m_Bits
+      value: 55
+      objectReference: {fileID: 0}
     - target: {fileID: 4720681283332808252, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
       propertyPath: m_Size.x
       value: 1.47

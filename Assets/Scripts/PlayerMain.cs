@@ -4,24 +4,110 @@ using UnityEngine;
 
 public class PlayerMain : MonoBehaviour
 {
-    private float _playerSpeed = 10f, _playerJump = 10f;
-    private bool _isFacingRight = true;
+    [SerializeField]
+    private float   _playerSpeed = 10f, 
+                    _playerJump = 10f,
+                    _speedDecayMultiplier = 0.95f,
+                    _jumpVelDecayHigh = 1.4f, 
+                    _jumpVelDecayLow = 1.9f;
+
+    private bool _isFacingRight = true, _isAirborne = false;
     private Vector2 _moveXY = new Vector2(0f, 0f);
+    private Vector3 _maskX, _maskY;
     public Rigidbody2D PlayerRig;
 
+    private Ray2D[] _rays;
+    public LayerMask GroundLayerMask;
+
+
+    void Start()
+    {
+        Vector2 spriteSize =  GetComponent<SpriteRenderer>().bounds.size;
+        _maskX = new Vector3(spriteSize.x / 2f, 0, 0);
+        _maskY = new Vector3(0,spriteSize.y / 2f, 0);
+    }
 
     void Update()
     {
         Move();
+
+        if(Input.GetKeyDown("space") && !_isAirborne) 
+            Jump();
+
+        VelocityDecay();
     }
 
     void Move()
     {
         _moveXY[0] = Input.GetAxis("Horizontal") * _playerSpeed;
-        _moveXY[1] = Input.GetAxis("Vertical") * _playerSpeed;
+        _moveXY[1] = PlayerRig.velocity.y;
 
         if( _moveXY[0] !=0 || _moveXY[1] !=0)
             PlayerRig.velocity = _moveXY;
+    }
+
+    public void Jump()
+    {
+        if(IsGrounded())
+        {    
+            PlayerRig.velocity = Vector2.up * _playerJump;
+            _isAirborne = true;
+        }
+        else
+            _isAirborne = false;
+    }
+
+    public bool IsGrounded()
+    {
+        Ray2D[] jumpRays = CreateRays();
+        foreach(Ray2D ray in jumpRays)
+        {
+            RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, _maskY[1] * 0.05f, GroundLayerMask);
+            if (hit.collider != null) 
+            {    
+                Debug.Log(hit.collider.gameObject.name);
+                return true;
+            }
+        }
+        return false;
+    }//// End of IsGrounded()
+
+    public Ray2D[] CreateRays()
+    {
+        // Construct 3 rays at the bottom of the player's sprite.
+        return _rays = new Ray2D[3]
+                                    {
+                                        // Create raycast at position clickedTiles's origin + tile's bounding area + tile margin offset
+                                        new Ray2D(transform.position - _maskY - _maskX, Vector2.down),             // Sends raycast 0.1m above tile
+                                        new Ray2D(transform.position - _maskY + _maskX, Vector2.down),             // Sends raycast 0.1m below tile
+                                        new Ray2D(transform.position - _maskY, Vector2.down),             // Sends raycast 0.1m to the right of the tile
+                                    };
+    }
+
+    public void VelocityDecay()
+    {
+        float x = PlayerRig.velocity.x;
+        Vector3 mask = PlayerRig.velocity;
+
+        if( x !=0.0f )              // Gradually reduce x-axis velocity (Unless being boosted by ramps)
+        {
+            mask.x *= _speedDecayMultiplier;
+            PlayerRig.velocity = mask;
+        }
+
+        if(PlayerRig.velocity.y < 0)              // Reduces floatiness of jumps
+            PlayerRig.velocity += Vector2.up * Physics2D.gravity.y * _jumpVelDecayHigh * Time.deltaTime;    
+        else if(PlayerRig.velocity.y > 0 && !Input.GetButton("Jump"))     // For low jumps
+            PlayerRig.velocity += Vector2.up * Physics2D.gravity.y * _jumpVelDecayLow  * Time.deltaTime;                // Start increasing downward velocity once player lets go of jump input
+        
+    }//// End of VelocityDecay()
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if(col.GetContact(0).normal == Vector2.up)   
+            _isAirborne = false;
+        else
+            Debug.Log("Side collision!");
     }
 
 }

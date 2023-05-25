@@ -51,15 +51,15 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 3.5, y: 4}
+    newSize: {x: 3.5, y: 4}
+    adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.47, y: 2.55}
   m_EdgeRadius: 0
 --- !u!50 &4775661858566513397
 Rigidbody2D:
@@ -94,7 +94,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07f4fca6d03b31c4a85d06b6d99c62ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerRig: {fileID: 0}
+  _playerSpeed: 10
+  _playerJump: 7
+  _speedDecayMultiplier: 0.8
+  _jumpVelDecayHigh: 0.9
+  _jumpVelDecayLow: 2.2
+  PlayerRig: {fileID: 4775661858566513397}
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 55
 --- !u!212 &4406522395545647594
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -135,15 +143,15 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_SortingOrder: 20
+  m_Sprite: {fileID: -404212524, guid: d17c792d363c82843b46831d3d691332, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.5, y: 4}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
