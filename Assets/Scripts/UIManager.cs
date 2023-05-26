@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
 
     bool _isPlaying = false, _isPaused = false;
 
-    public Sprite[] EndResultImages;
+    private Sprite[] _endResultImages;
 
     [SerializeField] private GameObject[] _instructionTextArray;
     private int _textIndexPointer = 0; 
@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
             else
                 _instructionTextArray[i].SetActive(false);
         }
-        PlaySFX?.Invoke("coinPickup");
+        // PlaySFX?.Invoke("coinPickup");
     }
 
     public void PlayGame()
@@ -135,21 +135,21 @@ public class UIManager : MonoBehaviour
         // PlaySFX?.Invoke("deposit");
     }
 
-    public void PauseGame()
+    public void TogglePauseGame()
     { 
             if(!_isPaused)
             {    
                 _pauseCanvas.gameObject.SetActive(true);
                 Time.timeScale = 0;
                 _isPaused = true;
-                PlaySFX?.Invoke("coinPickup");
+                // PlaySFX?.Invoke("coinPickup");
             }
             else
             {
                 _pauseCanvas.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 _isPaused = false;
-                PlaySFX?.Invoke("coinPickup");
+                // PlaySFX?.Invoke("coinPickup");
             }
     }
 
@@ -165,42 +165,20 @@ public class UIManager : MonoBehaviour
     
     public void TriggerEndGame()
     {
-        int score = GetFinalScore.Invoke(), colorTagIndex = 0;
         string[] colorTag = {"<color=#000000>", "<color=#ffffff>", "<color=#ffffff>"};
-        string tempString = score.ToString(), results; 
         ToggleCanvas("ResultsCanvas");
         _isPlaying = false;
         
-        if(score > 14000)
-        {
-            colorTagIndex = 0;
-            results = "A";
-            PlaySFX?.Invoke("resultsBest");
-        }
-        else if(score > 0 && score <= 14000)
-        {    
-            colorTagIndex = 2;
-            results = "B";
-            PlaySFX?.Invoke("resultsAverage");
-        }
-        else
-        {    
-            results = "F";
-            colorTagIndex = 1;
-            PlaySFX?.Invoke("resultsFail");
-        }
 
-        ResultsPanelImage.sprite = EndResultImages[colorTagIndex];
-        _resultsUITextArray[0].text = colorTag[colorTagIndex] + tempString + "</color>";
-        _resultsUITextArray[1].text = colorTag[colorTagIndex] + results + "</color>";
-        _resultsUITextArray[2].text = colorTag[colorTagIndex] + _resultsUITextArray[2].text.ToString() + "</color>";
-        _resultsUITextArray[3].text = colorTag[colorTagIndex] + _resultsUITextArray[3].text.ToString() + "</color>";
-        _resultsUITextArray[4].text = colorTag[colorTagIndex] + _resultsUITextArray[4].text.ToString() + "</color>";
+        // ResultsPanelImage.sprite = _endResultImages[colorTagIndex];
+        // _resultsUITextArray[0].text = colorTag[colorTagIndex] + tempString + "</color>";
+        // _resultsUITextArray[1].text = colorTag[colorTagIndex] + results + "</color>";
+        // _resultsUITextArray[2].text = colorTag[colorTagIndex] + _resultsUITextArray[2].text.ToString() + "</color>";
+        // _resultsUITextArray[3].text = colorTag[colorTagIndex] + _resultsUITextArray[3].text.ToString() + "</color>";
+        // _resultsUITextArray[4].text = colorTag[colorTagIndex] + _resultsUITextArray[4].text.ToString() + "</color>";
         // _resultsUITextArray[5].text = colorTag[colorTagIndex] + _resultsUITextArray[5].text.ToString() + "</color>";
         // _resultsUITextArray[6].text = colorTag[colorTagIndex] + _resultsUITextArray[6].text.ToString() + "</color>";
 
-        //ToDo Set endscreen graphics based on score.
-        //ToDo Play Audio based on score
     }
 
     public void TriggerTitleCanvas()
@@ -210,7 +188,7 @@ public class UIManager : MonoBehaviour
         _isPaused = false;
         _textIndexPointer = 0;
         AdvanceInstructionText();
-        PlaySFX?.Invoke("coinPickup");
+        // PlaySFX?.Invoke("coinPickup");
     }
 
 }
