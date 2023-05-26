@@ -7,6 +7,9 @@ public class EndZone : MonoBehaviour
     public SpriteRenderer EndZoneTriggerMarker;
     public bool ShowEndZoneMarker = false;
 
+    [HideInInspector] public delegate void OnSomeEvent();
+    [HideInInspector] public static OnSomeEvent EndZoneEntered;
+
     void Start()
     {
         EndZoneTriggerMarker.enabled = ShowEndZoneMarker;
@@ -15,6 +18,7 @@ public class EndZone : MonoBehaviour
     public void TriggerEndLevel()
     {
         Debug.Log("End zone entered!");
+        EndZoneEntered?.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D col)

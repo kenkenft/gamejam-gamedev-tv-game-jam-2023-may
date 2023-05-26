@@ -31,15 +31,13 @@ public class UIManager : MonoBehaviour
     {
         PlayerMain.TogglePauseUI += TogglePauseGame;
         PlayerMain.CheckIsPlaying += GetIsPlaying;
-        // Timer.CheckIsPaused += GetIsPaused;
-        // Timer.TriggerEndGame += TriggerEndGame;
+        EndZone.EndZoneEntered += TriggerEndLevel;
     }
     void Disable()
     {
         PlayerMain.TogglePauseUI -= TogglePauseGame;
-        PlayerMain.CheckIsPlaying += GetIsPlaying;
-        // Timer.CheckIsPaused -= GetIsPaused;
-        // Timer.TriggerEndGame -= TriggerEndGame;
+        PlayerMain.CheckIsPlaying -= GetIsPlaying;
+        EndZone.EndZoneEntered -= TriggerEndLevel;
     }
 
     void Start()
@@ -163,8 +161,9 @@ public class UIManager : MonoBehaviour
         return _isPlaying;
     }
     
-    public void TriggerEndGame()
+    public void TriggerEndLevel()
     {
+        Debug.Log("TriggerEndLevel called");
         string[] colorTag = {"<color=#000000>", "<color=#ffffff>", "<color=#ffffff>"};
         ToggleCanvas("ResultsCanvas");
         _isPlaying = false;
