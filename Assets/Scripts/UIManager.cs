@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     private List<Canvas> _canvasList = new List<Canvas>();
     public Image ResultsPanelImage;
 
-    bool _isPlaying = false, _isPaused = false;
+    [SerializeField] bool _isPlaying = false, _isPaused = false;
 
     private Sprite[] _endResultImages;
 
@@ -29,15 +29,15 @@ public class UIManager : MonoBehaviour
     
     void OnEnable()
     {
-        // PlayerControl.TogglePauseUI += PauseGame;
-        // PlayerControl.CheckIsPlaying += GetIsPlaying;
+        PlayerMain.TogglePauseUI += TogglePauseGame;
+        PlayerMain.CheckIsPlaying += GetIsPlaying;
         // Timer.CheckIsPaused += GetIsPaused;
         // Timer.TriggerEndGame += TriggerEndGame;
     }
     void Disable()
     {
-        // PlayerControl.TogglePauseUI -= PauseGame;
-        // PlayerControl.CheckIsPlaying += GetIsPlaying;
+        PlayerMain.TogglePauseUI -= TogglePauseGame;
+        PlayerMain.CheckIsPlaying += GetIsPlaying;
         // Timer.CheckIsPaused -= GetIsPaused;
         // Timer.TriggerEndGame -= TriggerEndGame;
     }
@@ -184,7 +184,7 @@ public class UIManager : MonoBehaviour
     public void TriggerTitleCanvas()
     {
         ToggleCanvas("TitleCanvas");
-        _isPlaying = true;
+        _isPlaying = false;
         _isPaused = false;
         _textIndexPointer = 0;
         AdvanceInstructionText();

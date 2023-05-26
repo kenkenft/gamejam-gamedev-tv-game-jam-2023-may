@@ -19,6 +19,11 @@ public class PlayerMain : MonoBehaviour
     private Ray2D[] _rays;
     public LayerMask GroundLayerMask;
 
+    [HideInInspector] public delegate void OnSomeEvent();
+    [HideInInspector] public static OnSomeEvent TogglePauseUI;
+
+    [HideInInspector] public delegate bool OnInteractKeyDown();
+    [HideInInspector] public static OnInteractKeyDown CheckIsPlaying;
 
     void Start()
     {
@@ -29,12 +34,18 @@ public class PlayerMain : MonoBehaviour
 
     void Update()
     {
-        Move();
+        if(CheckIsPlaying.Invoke())
+        {
+            Move();
 
-        if(Input.GetKeyDown("space") && !_isAirborne) 
-            Jump();
+            if(Input.GetKeyDown("space") && !_isAirborne) 
+                Jump();
 
-        VelocityDecay();
+            VelocityDecay();
+
+            if(Input.GetKeyDown(KeyCode.P))
+                    TogglePauseUI?.Invoke();
+        }
     }
 
     void Move()
