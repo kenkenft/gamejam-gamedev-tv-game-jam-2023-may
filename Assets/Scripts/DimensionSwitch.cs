@@ -9,6 +9,9 @@ public class DimensionSwitch : MonoBehaviour
     private int _activeMapIndex;
     public bool ShowMarker = false;
 
+    [HideInInspector] public delegate void SetPositionEvent(Vector3 position);
+    [HideInInspector] public static SetPositionEvent LevelStarted; 
+
     void OnEnable()
     {
         _activeMapIndex = 0;
@@ -45,4 +48,13 @@ public class DimensionSwitch : MonoBehaviour
         else
             _activeMapIndex = 0;
     }
+
+    public void SetupLevel()
+    {
+        _activeMapIndex = 0;
+        GroundTileMaps[0].SetActive(true);
+        GroundTileMaps[1].SetActive(false);
+        StartPos.GetComponent<SpriteRenderer>().enabled = ShowMarker;
+        LevelStarted?.Invoke(StartPos.transform.position);
+    } 
 }

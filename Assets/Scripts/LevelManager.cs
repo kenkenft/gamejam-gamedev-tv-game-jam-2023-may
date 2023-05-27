@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public DimensionSwitch[] LevelObjects;
-    [SerializeField] private int _currentLevel = 0;
+    [SerializeField] private int _currentLevel = 0, _previousLevel = 0;
 
     void OnEnable()
     {
@@ -29,6 +29,7 @@ public class LevelManager : MonoBehaviour
 
     public void SetCurrentLevel(int nextLevel)
     {
+        _previousLevel = _currentLevel;
         _currentLevel = nextLevel;
     }
 
@@ -38,5 +39,8 @@ public class LevelManager : MonoBehaviour
         // Set up level layout
         // 
         Debug.Log("StartLevel called! Next Level: " + _currentLevel);
+        LevelObjects[_previousLevel].gameObject.SetActive(false);
+        LevelObjects[_currentLevel].gameObject.SetActive(true);
+        LevelObjects[_currentLevel].SetupLevel();
     }
 }

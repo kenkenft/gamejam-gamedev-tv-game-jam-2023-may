@@ -121,7 +121,7 @@ public class UIManager : MonoBehaviour
         // PlaySFX?.Invoke("coinPickup");
     }
 
-    public void PlayGame()
+    public void ContinueToNextLevel()
     {
         Time.timeScale = 1;
         // Debug.Log("Play button pressed!");
@@ -129,7 +129,9 @@ public class UIManager : MonoBehaviour
         
         _isPlaying = true;
         _isPaused = false;
-        ContinueToNextLevel();
+
+        NextLevelRequested?.Invoke();
+
         // StartGameSetUp?.Invoke();
         // PlaySFX?.Invoke("deposit");
     }
@@ -181,10 +183,10 @@ public class UIManager : MonoBehaviour
 
     }
 
-    public void ContinueToNextLevel()
-    {
-        NextLevelRequested?.Invoke();
-    }
+    // public void ContinueToNextLevel()
+    // {
+    //     NextLevelRequested?.Invoke();
+    // }
 
     public void TriggerTitleCanvas()
     {

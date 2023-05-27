@@ -11,7 +11,7 @@ public class PlayerMain : MonoBehaviour
                     _jumpVelDecayHigh = 1.4f, 
                     _jumpVelDecayLow = 1.9f;
 
-    private bool _isFacingRight = true, _isAirborne = false;
+    [SerializeField] private bool _isFacingRight = true, _isAirborne = false;
     private Vector2 _moveXY = new Vector2(0f, 0f);
     private Vector3 _maskX, _maskY;
     public Rigidbody2D PlayerRig;
@@ -25,6 +25,16 @@ public class PlayerMain : MonoBehaviour
 
     [HideInInspector] public delegate bool OnInteractKeyDown();
     [HideInInspector] public static OnInteractKeyDown CheckIsPlaying;
+
+    void OnEnable()
+    {
+        DimensionSwitch.LevelStarted += RepositionPlayer;
+    }
+    
+    void OnDisable()
+    {
+        DimensionSwitch.LevelStarted -= RepositionPlayer;
+    }
 
     void Start()
     {
@@ -123,6 +133,11 @@ public class PlayerMain : MonoBehaviour
             _isAirborne = false;
         else
             Debug.Log("Side collision!");
+    }
+
+    public void RepositionPlayer(Vector3 location)
+    {
+        this.gameObject.transform.position = location;
     }
 
 }
