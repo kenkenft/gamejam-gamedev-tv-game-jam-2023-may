@@ -7,6 +7,8 @@ public class LevelManager : MonoBehaviour
     public DimensionSwitch[] LevelObjects;
     [SerializeField] private int _currentLevel = 0, _previousLevel = 0;
 
+    public Camera MainCamera;
+    public float[] CameraOrthSizes;
     [HideInInspector] public delegate void OnSomeEvent();
     [HideInInspector] public static OnSomeEvent TitleSwitchOccurred;
 
@@ -50,11 +52,20 @@ public class LevelManager : MonoBehaviour
         Debug.Log("StartLevel called! Next Level: " + _currentLevel);
         LevelObjects[_previousLevel].gameObject.SetActive(false);
         LevelObjects[_currentLevel].gameObject.SetActive(true);
+        SetCameraSize(); 
         LevelObjects[_currentLevel].SetupLevel();
     }
 
     public int GetCurrentLevel()
     {
         return _currentLevel;
+    }
+
+    void SetCameraSize()
+    {
+        if(_currentLevel < CameraOrthSizes.Length)
+            MainCamera.orthographicSize = CameraOrthSizes[_currentLevel];
+        else
+            MainCamera.orthographicSize = 20f;
     }
 }
