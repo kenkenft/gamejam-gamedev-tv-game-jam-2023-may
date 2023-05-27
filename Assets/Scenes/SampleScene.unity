@@ -173,6 +173,7 @@ MonoBehaviour:
   - {fileID: 1790684856}
   - {fileID: 448899280}
   _currentLevel: 0
+  _previousLevel: 0
 --- !u!1 &123785159
 GameObject:
   m_ObjectHideFlags: 0
