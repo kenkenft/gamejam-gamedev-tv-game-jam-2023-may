@@ -1446,6 +1446,7 @@ MonoBehaviour:
   GroundTileMaps:
   - {fileID: 123785159}
   - {fileID: 431042002}
+  ShowMarker: 0
 --- !u!1001 &246684608448218541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1702,6 +1703,18 @@ PrefabInstance:
     - target: {fileID: 4861858849253362873, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861858849353340892, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
+      propertyPath: m_Name
+      value: NextLevelButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861858849440457586, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
+      propertyPath: m_Text
+      value: Next
+      objectReference: {fileID: 0}
+    - target: {fileID: 4861858849440457588, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
+      propertyPath: m_Name
+      value: NextLevelButtonText
       objectReference: {fileID: 0}
     - target: {fileID: 4861858850000158063, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
       propertyPath: m_Camera

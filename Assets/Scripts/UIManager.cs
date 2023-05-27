@@ -19,10 +19,10 @@ public class UIManager : MonoBehaviour
     private int _textIndexPointer = 0; 
     [SerializeField] private Text[] _resultsUITextArray;
 
-    [HideInInspector] public delegate void OnPlayButtonClicked();
-    [HideInInspector] public static OnPlayButtonClicked StartGameSetUp;
-    [HideInInspector] public delegate int OnEndgGameTriggered();
-    [HideInInspector] public static OnEndgGameTriggered GetFinalScore;
+    [HideInInspector] public delegate void OnSomeEvent();
+    [HideInInspector] public static OnSomeEvent StartGameSetUp;
+    [HideInInspector] public static OnSomeEvent NextLevelRequested;
+
 
     [HideInInspector] public delegate void OnPlaySFX(string audioName);
     [HideInInspector] public static OnPlaySFX PlaySFX;
@@ -129,7 +129,8 @@ public class UIManager : MonoBehaviour
         
         _isPlaying = true;
         _isPaused = false;
-        StartGameSetUp?.Invoke();
+        ContinueToNextLevel();
+        // StartGameSetUp?.Invoke();
         // PlaySFX?.Invoke("deposit");
     }
 
@@ -178,6 +179,11 @@ public class UIManager : MonoBehaviour
         // _resultsUITextArray[5].text = colorTag[colorTagIndex] + _resultsUITextArray[5].text.ToString() + "</color>";
         // _resultsUITextArray[6].text = colorTag[colorTagIndex] + _resultsUITextArray[6].text.ToString() + "</color>";
 
+    }
+
+    public void ContinueToNextLevel()
+    {
+        NextLevelRequested?.Invoke();
     }
 
     public void TriggerTitleCanvas()
