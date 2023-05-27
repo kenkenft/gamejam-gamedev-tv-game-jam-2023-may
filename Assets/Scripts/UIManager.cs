@@ -23,7 +23,8 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public static OnSomeEvent StartGameSetUp;
     [HideInInspector] public static OnSomeEvent NextLevelRequested;
 
-
+    [HideInInspector] public delegate int IntValueGet();
+    [HideInInspector] public static IntValueGet IntValueRequested;
     [HideInInspector] public delegate void OnPlaySFX(string audioName);
     [HideInInspector] public static OnPlaySFX PlaySFX;
     
@@ -32,17 +33,20 @@ public class UIManager : MonoBehaviour
         PlayerMain.TogglePauseUI += TogglePauseGame;
         PlayerMain.CheckIsPlaying += GetIsPlaying;
         EndZone.EndZoneEntered += TriggerEndLevel;
+        LevelManager.TitleSwitchOccurred += AdvanceInstructionText;
     }
     void Disable()
     {
         PlayerMain.TogglePauseUI -= TogglePauseGame;
         PlayerMain.CheckIsPlaying -= GetIsPlaying;
         EndZone.EndZoneEntered -= TriggerEndLevel;
+        LevelManager.TitleSwitchOccurred -= AdvanceInstructionText;
     }
 
     void Start()
     {
-        SetCanvasRefs();            
+        SetCanvasRefs();
+        ContinueToNextLevel();            
         TriggerTitleCanvas();
     }
 
@@ -124,10 +128,14 @@ public class UIManager : MonoBehaviour
     public void ContinueToNextLevel()
     {
         Time.timeScale = 1;
-        // Debug.Log("Play button pressed!");
-        ToggleCanvas("PlayerOverlayCanvas");
-        
         _isPlaying = true;
+
+        // Debug.Log("Play button pressed!");
+        if(IntValueRequested.Invoke() != 0)
+            ToggleCanvas("PlayerOverlayCanvas");
+        else
+            ToggleCanvas("TitleCanvas");
+
         _isPaused = false;
 
         NextLevelRequested?.Invoke();
@@ -191,7 +199,7 @@ public class UIManager : MonoBehaviour
     public void TriggerTitleCanvas()
     {
         ToggleCanvas("TitleCanvas");
-        _isPlaying = false;
+        _isPlaying = true;
         _isPaused = false;
         _textIndexPointer = 0;
         AdvanceInstructionText();

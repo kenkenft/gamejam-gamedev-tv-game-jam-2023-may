@@ -7,11 +7,15 @@ public class LevelManager : MonoBehaviour
     public DimensionSwitch[] LevelObjects;
     [SerializeField] private int _currentLevel = 0, _previousLevel = 0;
 
+    [HideInInspector] public delegate void OnSomeEvent();
+    [HideInInspector] public static OnSomeEvent TitleSwitchOccurred;
+
     void OnEnable()
     {
         PlayerMain.DimensionButtonPressed += SwitchDimensions;
         EndZone.LevelCompleted += SetCurrentLevel;
         UIManager.NextLevelRequested += StartNextLevel;
+        UIManager.IntValueRequested += GetCurrentLevel;
     }
 
     void OnDisable()
@@ -19,11 +23,16 @@ public class LevelManager : MonoBehaviour
         PlayerMain.DimensionButtonPressed -= SwitchDimensions;
         EndZone.LevelCompleted -= SetCurrentLevel;
         UIManager.NextLevelRequested -= StartNextLevel;
+        UIManager.IntValueRequested -= GetCurrentLevel;
     }
     
     public void SwitchDimensions()
     {
         Debug.Log("SwitchDimensions called!");
+
+        if(_currentLevel == 0)
+            TitleSwitchOccurred?.Invoke();
+
         LevelObjects[_currentLevel].ChangeLayout();
     }
 
@@ -42,5 +51,10 @@ public class LevelManager : MonoBehaviour
         LevelObjects[_previousLevel].gameObject.SetActive(false);
         LevelObjects[_currentLevel].gameObject.SetActive(true);
         LevelObjects[_currentLevel].SetupLevel();
+    }
+
+    public int GetCurrentLevel()
+    {
+        return _currentLevel;
     }
 }
