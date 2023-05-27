@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class DimensionSwitch : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public GameObject StartPos;
+    
+    public void ChangeLayout()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Debug.Log("ChangeLayout called! " + gameObject.name);
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public DimensionSwitch[] LevelObjects;
+    [SerializeField] private int _currentLevel = 0;
 
     void OnEnable()
     {
@@ -19,5 +20,6 @@ public class LevelManager : MonoBehaviour
     public void SwitchDimensions()
     {
         Debug.Log("SwitchDimensions called!");
+        LevelObjects[_currentLevel].ChangeLayout();
     }
 }
