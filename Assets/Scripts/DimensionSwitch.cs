@@ -7,12 +7,14 @@ public class DimensionSwitch : MonoBehaviour
     public GameObject StartPos;
     public GameObject[] GroundTileMaps; // Assumes that index 0 is enabled, and index 1 is disabled at level start
     private int _activeMapIndex;
+    public bool ShowMarker = false;
 
     void OnEnable()
     {
         _activeMapIndex = 0;
         GroundTileMaps[0].SetActive(true);
         GroundTileMaps[1].SetActive(false);
+        StartPos.GetComponent<SpriteRenderer>().enabled = ShowMarker;
     }
     
     public void ChangeLayout()

@@ -10,16 +10,23 @@ public class LevelManager : MonoBehaviour
     void OnEnable()
     {
         PlayerMain.DimensionButtonPressed += SwitchDimensions;
+        EndZone.LevelCompleted += SetCurrentLevel;
     }
 
     void OnDisable()
     {
         PlayerMain.DimensionButtonPressed -= SwitchDimensions;
+        EndZone.LevelCompleted -= SetCurrentLevel;
     }
     
     public void SwitchDimensions()
     {
         Debug.Log("SwitchDimensions called!");
         LevelObjects[_currentLevel].ChangeLayout();
+    }
+
+    public void SetCurrentLevel(int nextLevel)
+    {
+        _currentLevel = nextLevel;
     }
 }
