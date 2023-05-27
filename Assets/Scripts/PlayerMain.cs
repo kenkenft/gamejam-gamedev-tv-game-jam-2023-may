@@ -54,10 +54,10 @@ public class PlayerMain : MonoBehaviour
 
             VelocityDecay();
 
-            if(Input.GetKeyDown(KeyCode.R))
-                    RestartButtonPressed?.Invoke();
+            if(Input.GetKeyDown(KeyCode.G))
+                RestartButtonPressed?.Invoke();
 
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.U))
                 DimensionButtonPressed?.Invoke();
         }
     }

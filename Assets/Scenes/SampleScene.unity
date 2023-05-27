@@ -24667,6 +24667,20 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -50
       objectReference: {fileID: 0}
+    - target: {fileID: 4861858848658501841, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
+      propertyPath: m_Text
+      value: 'Controls:
+
+        - Move: <color=#feae34>A,D</color> or <color=#feae34>J,L</color>
+
+        -
+        Jump: <color=#feae34>Spacebar</color>
+
+        - Switch Dimensions: <color=#feae34>E</color>,
+        or <color=#feae34>U</color>
+
+        - Restart: <color=#feae34>G</color>'
+      objectReference: {fileID: 0}
     - target: {fileID: 4861858848689495915, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
