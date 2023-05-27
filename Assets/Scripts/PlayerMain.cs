@@ -21,6 +21,7 @@ public class PlayerMain : MonoBehaviour
 
     [HideInInspector] public delegate void OnSomeEvent();
     [HideInInspector] public static OnSomeEvent TogglePauseUI;
+    [HideInInspector] public static OnSomeEvent DimensionButtonPressed;
 
     [HideInInspector] public delegate bool OnInteractKeyDown();
     [HideInInspector] public static OnInteractKeyDown CheckIsPlaying;
@@ -45,6 +46,9 @@ public class PlayerMain : MonoBehaviour
 
             if(Input.GetKeyDown(KeyCode.P))
                     TogglePauseUI?.Invoke();
+
+            if(Input.GetKeyDown(KeyCode.E))
+                DimensionButtonPressed?.Invoke();
         }
     }
 
