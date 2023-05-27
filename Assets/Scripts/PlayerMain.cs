@@ -130,12 +130,25 @@ public class PlayerMain : MonoBehaviour
         
     }//// End of VelocityDecay()
 
-    void OnCollisionEnter2D(Collision2D col)
+    void OnCollisionStay2D(Collision2D col)
     {
-        if(col.GetContact(0).normal == Vector2.up)   
-            _isAirborne = false;
-        else
-            Debug.Log("Side collision!");
+        if(_isAirborne)
+        {
+            ContactPoint2D[] contact = new ContactPoint2D[col.contactCount];
+            int points = col.GetContacts(contact);
+
+            foreach(ContactPoint2D point in contact)
+            {
+                if(point.normal == Vector2.up)   
+                    _isAirborne = false;
+            }
+        }
+
+        // Collision2D[] allContacts = col.GetContacts(col.);
+        // if(col.GetContact(0).normal == Vector2.up)   
+        //     _isAirborne = false;
+        // else
+        //     Debug.Log("Side collision!");
     }
 
     public void RepositionPlayer(Vector3 location)
