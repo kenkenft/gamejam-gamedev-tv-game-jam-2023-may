@@ -656,6 +656,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5300038606601722738, guid: bd2d59a618d21e84f8d47f3e12d8eee7, type: 3}
       propertyPath: NextLevel
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5300038606601722738, guid: bd2d59a618d21e84f8d47f3e12d8eee7, type: 3}
+      propertyPath: IsFinalLevel
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5300038607074203946, guid: bd2d59a618d21e84f8d47f3e12d8eee7, type: 3}
@@ -20650,7 +20654,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0, g: 0.2830189, b: 0.039381646, a: 1}
+  m_Color: {r: 0.5850651, g: 0.6509434, b: 0.021493427, a: 1}
   m_Origin: {x: -16, y: -4, z: 0}
   m_Size: {x: 32, y: 21, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -24408,7 +24412,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.6004361, g: 0.9716981, b: 0.65200025, a: 1}
+  m_Color: {r: 0.9692361, g: 0.972549, b: 0.6, a: 1}
   m_Origin: {x: -16, y: -4, z: 0}
   m_Size: {x: 32, y: 21, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
@@ -24533,6 +24537,10 @@ PrefabInstance:
       propertyPath: GroundLayerMask.m_Bits
       value: 64
       objectReference: {fileID: 0}
+    - target: {fileID: 4775661858566513397, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 6200000, guid: 5e9a93fcfd82b774c89a8f60c0a9a2dc, type: 2}
     - target: {fileID: 5180658571100134398, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -24657,7 +24665,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2335605637803079293, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4861858848357209901, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
       propertyPath: m_IsActive
@@ -24833,7 +24841,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4861858849121631747, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4861858849170167616, guid: 77ded24f1a8b7484fbcd93c670e3871c, type: 3}
       propertyPath: m_Text

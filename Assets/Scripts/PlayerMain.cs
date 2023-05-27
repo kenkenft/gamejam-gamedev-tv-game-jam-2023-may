@@ -20,7 +20,7 @@ public class PlayerMain : MonoBehaviour
     public LayerMask GroundLayerMask;
 
     [HideInInspector] public delegate void OnSomeEvent();
-    [HideInInspector] public static OnSomeEvent TogglePauseUI;
+    [HideInInspector] public static OnSomeEvent RestartButtonPressed;
     [HideInInspector] public static OnSomeEvent DimensionButtonPressed;
 
     [HideInInspector] public delegate bool OnInteractKeyDown();
@@ -54,8 +54,8 @@ public class PlayerMain : MonoBehaviour
 
             VelocityDecay();
 
-            if(Input.GetKeyDown(KeyCode.P))
-                    TogglePauseUI?.Invoke();
+            if(Input.GetKeyDown(KeyCode.R))
+                    RestartButtonPressed?.Invoke();
 
             if(Input.GetKeyDown(KeyCode.E))
                 DimensionButtonPressed?.Invoke();

@@ -30,14 +30,14 @@ public class UIManager : MonoBehaviour
     
     void OnEnable()
     {
-        PlayerMain.TogglePauseUI += TogglePauseGame;
+        PlayerMain.RestartButtonPressed += ContinueToNextLevel;
         PlayerMain.CheckIsPlaying += GetIsPlaying;
         EndZone.EndZoneEntered += TriggerEndLevel;
         LevelManager.TitleSwitchOccurred += AdvanceInstructionText;
     }
     void Disable()
     {
-        PlayerMain.TogglePauseUI -= TogglePauseGame;
+        PlayerMain.RestartButtonPressed -= ContinueToNextLevel;
         PlayerMain.CheckIsPlaying -= GetIsPlaying;
         EndZone.EndZoneEntered -= TriggerEndLevel;
         LevelManager.TitleSwitchOccurred -= AdvanceInstructionText;
@@ -134,7 +134,7 @@ public class UIManager : MonoBehaviour
         if(IntValueRequested.Invoke() != 0)
             ToggleCanvas("PlayerOverlayCanvas");
         else
-            ToggleCanvas("TitleCanvas");
+            TriggerTitleCanvas();
 
         _isPaused = false;
 
