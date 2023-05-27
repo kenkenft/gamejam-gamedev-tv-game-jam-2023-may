@@ -15,6 +15,16 @@ public class EndZone : MonoBehaviour
 
     [HideInInspector] public delegate void SetValueEvent(int value);
     [HideInInspector] public static SetValueEvent LevelCompleted;
+    
+    void OnEnable()
+    {
+        UIManager.IsFinalLevelRequested += GetIsFinalLevel;
+    }
+
+    void Disable()
+    {
+        UIManager.IsFinalLevelRequested -= GetIsFinalLevel;
+    }
     void Start()
     {
         EndZoneTriggerMarker.enabled = ShowEndZoneMarker;
@@ -43,5 +53,10 @@ public class EndZone : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public bool GetIsFinalLevel()
+    {
+        return IsFinalLevel;
     }
 }

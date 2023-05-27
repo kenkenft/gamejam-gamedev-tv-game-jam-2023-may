@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
 
     [HideInInspector] public delegate int IntValueGet();
     [HideInInspector] public static IntValueGet IntValueRequested;
+    [HideInInspector] public delegate bool BoolValueGet();
+    [HideInInspector] public static BoolValueGet IsFinalLevelRequested;
     [HideInInspector] public delegate void OnPlaySFX(string audioName);
     [HideInInspector] public static OnPlaySFX PlaySFX;
     
@@ -122,7 +124,6 @@ public class UIManager : MonoBehaviour
             else
                 _instructionTextArray[i].SetActive(false);
         }
-        // PlaySFX?.Invoke("coinPickup");
     }
 
     public void ContinueToNextLevel()
@@ -140,8 +141,7 @@ public class UIManager : MonoBehaviour
 
         NextLevelRequested?.Invoke();
 
-        // StartGameSetUp?.Invoke();
-        // PlaySFX?.Invoke("deposit");
+        PlaySFX?.Invoke("Start");
     }
 
     public void TogglePauseGame()
@@ -179,7 +179,10 @@ public class UIManager : MonoBehaviour
         ToggleCanvas("ResultsCanvas");
         _isPlaying = false;
         
-
+        if(IsFinalLevelRequested.Invoke())
+            PlaySFX?.Invoke("FinalLevelComplete");
+        else
+            PlaySFX?.Invoke("LevelComplete");
         // ResultsPanelImage.sprite = _endResultImages[colorTagIndex];
         // _resultsUITextArray[0].text = colorTag[colorTagIndex] + tempString + "</color>";
         // _resultsUITextArray[1].text = colorTag[colorTagIndex] + results + "</color>";

@@ -26,6 +26,9 @@ public class PlayerMain : MonoBehaviour
     [HideInInspector] public delegate bool OnInteractKeyDown();
     [HideInInspector] public static OnInteractKeyDown CheckIsPlaying;
 
+    [HideInInspector] public delegate void OnPlaySFX(string audioName);
+    [HideInInspector] public static OnPlaySFX PlaySFX;
+
     void OnEnable()
     {
         DimensionSwitch.LevelStarted += RepositionPlayer;
@@ -77,9 +80,8 @@ public class PlayerMain : MonoBehaviour
         {    
             PlayerRig.velocity = Vector2.up * _playerJump;
             _isAirborne = true;
+            PlaySFX?.Invoke("Jump");
         }
-        else
-            _isAirborne = false;
     }
 
     public bool IsGrounded()
@@ -130,6 +132,21 @@ public class PlayerMain : MonoBehaviour
         
     }//// End of VelocityDecay()
 
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        ContactPoint2D[] contact = new ContactPoint2D[col.contactCount];
+        int points = col.GetContacts(contact);
+
+        // foreach(ContactPoint2D point in contact)
+        // {
+            if(col.GetContact(0).normal == Vector2.up)   
+            {    
+                PlaySFX?.Invoke("Landed");
+                // break;
+            }
+        // }
+    }
+
     void OnCollisionStay2D(Collision2D col)
     {
         if(_isAirborne)
@@ -140,15 +157,12 @@ public class PlayerMain : MonoBehaviour
             foreach(ContactPoint2D point in contact)
             {
                 if(point.normal == Vector2.up)   
-                    _isAirborne = false;
+                {    
+                    _isAirborne = false; 
+                    break;
+                }
             }
         }
-
-        // Collision2D[] allContacts = col.GetContacts(col.);
-        // if(col.GetContact(0).normal == Vector2.up)   
-        //     _isAirborne = false;
-        // else
-        //     Debug.Log("Side collision!");
     }
 
     public void RepositionPlayer(Vector3 location)

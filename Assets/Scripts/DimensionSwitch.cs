@@ -12,18 +12,22 @@ public class DimensionSwitch : MonoBehaviour
     [HideInInspector] public delegate void SetPositionEvent(Vector3 position);
     [HideInInspector] public static SetPositionEvent LevelStarted; 
 
-    void OnEnable()
-    {
-        _activeMapIndex = 0;
-        GroundTileMaps[0].SetActive(true);
-        GroundTileMaps[1].SetActive(false);
-        StartPos.GetComponent<SpriteRenderer>().enabled = ShowMarker;
-    }
+    [HideInInspector] public delegate void OnPlaySFX(string audioName);
+    [HideInInspector] public static OnPlaySFX PlaySFX;
+
+    // void OnEnable()
+    // {
+    //     _activeMapIndex = 0;
+    //     GroundTileMaps[0].SetActive(true);
+    //     GroundTileMaps[1].SetActive(false);
+    //     StartPos.GetComponent<SpriteRenderer>().enabled = ShowMarker;
+    // }
     
     public void ChangeLayout()
     {
         Debug.Log("ChangeLayout called! " + gameObject.name);
         ToggleTileMaps();
+        PlaySFX?.Invoke("Switch");
     }
 
     void ToggleTileMaps()
