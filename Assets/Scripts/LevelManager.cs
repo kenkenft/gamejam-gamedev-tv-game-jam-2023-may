@@ -5,7 +5,7 @@ using UnityEngine;
 public class LevelManager : MonoBehaviour
 {
     public DimensionSwitch[] LevelObjects;
-    [SerializeField] private int _currentLevel = 0, _previousLevel = 0;
+    [SerializeField] private int _currentLevel = 0;
 
     public Camera MainCamera;
     public float[] CameraOrthSizes;
@@ -40,7 +40,6 @@ public class LevelManager : MonoBehaviour
 
     public void SetCurrentLevel(int nextLevel)
     {
-        _previousLevel = _currentLevel;
         _currentLevel = nextLevel;
     }
 
@@ -50,10 +49,20 @@ public class LevelManager : MonoBehaviour
         // Set up level layout
         // 
         Debug.Log("StartLevel called! Next Level: " + _currentLevel);
-        LevelObjects[_previousLevel].gameObject.SetActive(false);
-        LevelObjects[_currentLevel].gameObject.SetActive(true);
+        ToggleActiveLevel();
         SetCameraSize(); 
         LevelObjects[_currentLevel].SetupLevel();
+    }
+
+    void ToggleActiveLevel()
+    {
+        for(int i = 0; i < LevelObjects.Length; i++)
+        {
+            if(i == _currentLevel)
+                LevelObjects[i].gameObject.SetActive(true);
+            else
+                LevelObjects[i].gameObject.SetActive(false);
+        }
     }
 
     public int GetCurrentLevel()
