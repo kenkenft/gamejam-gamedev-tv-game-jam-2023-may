@@ -52,7 +52,7 @@ public class PlayerMain : MonoBehaviour
         {
             Move();
 
-            if(Input.GetKeyDown("space") && !_isAirborne) 
+            if(Input.GetKeyDown("space")) 
                 Jump();
 
             VelocityDecay();
