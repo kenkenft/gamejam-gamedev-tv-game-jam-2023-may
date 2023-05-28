@@ -60,7 +60,7 @@ public class PlayerMain : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.G))
                 RestartButtonPressed?.Invoke();
 
-            if(Input.GetKeyDown(KeyCode.E) || Input.GetKeyDown(KeyCode.U))
+            if(Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.I))
                 DimensionButtonPressed?.Invoke();
         }
     }
