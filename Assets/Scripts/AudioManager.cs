@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
         PlayerMain.PlaySFX += PlaySound;
         UIManager.PlaySFX += PlaySound;
         DimensionSwitch.PlaySFX += PlaySound;
+        WaterCurrent.PlaySFX += PlaySound;
     }
 
     void OnDisable()
@@ -22,6 +23,7 @@ public class AudioManager : MonoBehaviour
         PlayerMain.PlaySFX -= PlaySound;
         UIManager.PlaySFX -= PlaySound;
         DimensionSwitch.PlaySFX -= PlaySound;
+        WaterCurrent.PlaySFX -= PlaySound;
     }
 
     void Awake()
