@@ -3427,7 +3427,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 17
+  m_SortingOrder: 21
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -3986,7 +3986,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 17
+  m_SortingOrder: 21
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
@@ -7172,41 +7172,55 @@ MonoBehaviour:
     source: {fileID: 0}
     volume: 1
     pitch: 1.5
+    loop: 0
   - name: LevelComplete
     clip: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
     source: {fileID: 0}
     volume: 1
     pitch: 1
+    loop: 0
   - name: Switch
     clip: {fileID: 8300000, guid: 35fbad8cdde724f11ba6481f1e64af71, type: 3}
     source: {fileID: 0}
     volume: 0.5
     pitch: 1
+    loop: 0
   - name: FinalLevelComplete
     clip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
     source: {fileID: 0}
     volume: 1
     pitch: 1
+    loop: 0
   - name: Start
     clip: {fileID: 8300000, guid: 0c008ee3ee72a4362a35be25fa5de043, type: 3}
     source: {fileID: 0}
     volume: 1
     pitch: 0.5
+    loop: 0
   - name: Landed
     clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
     source: {fileID: 0}
     volume: 3
     pitch: 1.5
+    loop: 0
   - name: Water
     clip: {fileID: 8300000, guid: fa6cba83a4316904f9489e7d058b2c15, type: 3}
     source: {fileID: 0}
     volume: 1
     pitch: 1
+    loop: 0
   - name: Thorns
     clip: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
     source: {fileID: 0}
     volume: 2
     pitch: 1
+    loop: 0
+  - name: ThemeA
+    clip: {fileID: 8300000, guid: ccf82dcf75cd9e149acff9ff2ef245a5, type: 3}
+    source: {fileID: 0}
+    volume: 2
+    pitch: 1
+    loop: 1
 --- !u!1 &610538335
 GameObject:
   m_ObjectHideFlags: 0
@@ -31823,7 +31837,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 17
+  m_SortingOrder: 21
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
   m_MaxChunkCount: 16
