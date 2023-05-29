@@ -214,11 +214,11 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 2
-    m_ConditionEvent: _isAirborne
-    m_EventTreshold: 0
   - m_ConditionMode: 1
     m_ConditionEvent: _isMovingSideways
+    m_EventTreshold: 0
+  - m_ConditionMode: 2
+    m_ConditionEvent: _isAirborne
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 3070497522769435044}
@@ -272,6 +272,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: _velocityY
     m_EventTreshold: 0.1
+  - m_ConditionMode: 1
+    m_ConditionEvent: _isAirborne
+    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6975051162545209170}
   m_Solo: 0

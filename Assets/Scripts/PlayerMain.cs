@@ -83,7 +83,7 @@ public class PlayerMain : MonoBehaviour
         if(IsGrounded())
         {    
             PlayerRig.velocity = Vector2.up * _playerJump;
-            _isAirborne = true;
+            // _isAirborne = true;
             PlaySFX?.Invoke("Jump");
         }
     }
@@ -141,32 +141,49 @@ public class PlayerMain : MonoBehaviour
         ContactPoint2D[] contact = new ContactPoint2D[col.contactCount];
         int points = col.GetContacts(contact);
 
-        // foreach(ContactPoint2D point in contact)
-        // {
-            if(col.GetContact(0).normal == Vector2.up)   
-            {    
-                PlaySFX?.Invoke("Landed");
-                // break;
-            }
-        // }
-    }
-
-    void OnCollisionStay2D(Collision2D col)
-    {
-        if(_isAirborne)
-        {
-            ContactPoint2D[] contact = new ContactPoint2D[col.contactCount];
-            int points = col.GetContacts(contact);
-
-            foreach(ContactPoint2D point in contact)
+        // // foreach(ContactPoint2D point in contact)
+        // // {
+        //     if(col.GetContact(0).normal == Vector2.up)   
+        //     {    
+        //         PlaySFX?.Invoke("Landed");
+        //         _isAirborne = false; 
+        //         // break;
+        //     }
+        // // }
+        foreach(ContactPoint2D point in contact)
             {
+                Debug.Log(point.normal);
                 if(point.normal == Vector2.up)   
                 {    
+                    PlaySFX?.Invoke("Landed");
                     _isAirborne = false; 
                     break;
                 }
             }
-        }
+    }
+
+    // void OnCollisionStay2D(Collision2D col)
+    // {
+    //     if(_isAirborne)
+    //     {
+    //         ContactPoint2D[] contact = new ContactPoint2D[col.contactCount];
+    //         int points = col.GetContacts(contact);
+
+    //         foreach(ContactPoint2D point in contact)
+    //         {
+    //             Debug.Log(point.normal);
+    //             if(point.normal == Vector2.up)   
+    //             {    
+    //                 _isAirborne = false; 
+    //                 break;
+    //             }
+    //         }
+    //     }
+    // }
+
+    void OnCollisionExit2D(Collision2D col)
+    {
+        _isAirborne = true;
     }
 
     public void RepositionPlayer(Vector3 location)
@@ -181,7 +198,7 @@ void SetPlayerAnimation()
         animator.SetFloat("_velocityY", _moveXY[1]);
         animator.SetFloat("_velocityX", Mathf.Abs(_moveXY[0]));
 
-        if(_moveXY[1] != 0f)
+        if(_moveXY[1] != 0f && _isAirborne)
         {    
             animator.SetBool("_isAirborne", true);
             if(_moveXY[1] > 0)
@@ -212,18 +229,6 @@ void SetPlayerAnimation()
             _isMovingSideways = false;
             animator.SetBool("_isMovingSideways", false);
         }
-
-        if(_moveXY[0] >= 0f)
-        {    
-            // _isFacingRight = true;
-            animator.SetBool("_isFacingRight", true);
-        }
-        else
-        {    
-            // _isFacingRight = false;
-            animator.SetBool("_isFacingRight", false);
-        }
-        
         
         if(_isMovingSideways)
         {    
