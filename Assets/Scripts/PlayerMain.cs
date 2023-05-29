@@ -11,13 +11,15 @@ public class PlayerMain : MonoBehaviour
                     _jumpVelDecayHigh = 1.4f, 
                     _jumpVelDecayLow = 1.9f;
 
-    [SerializeField] private bool _isFacingRight = true, _isAirborne = false;
+    [SerializeField] private bool _isFacingRight = true, _isAirborne = false, _isMovingSideways = false;
     private Vector2 _moveXY = new Vector2(0f, 0f);
     private Vector3 _maskX, _maskY;
     public Rigidbody2D PlayerRig;
 
     private Ray2D[] _rays;
     public LayerMask GroundLayerMask;
+
+    public Animator animator;
 
     [HideInInspector] public delegate void OnSomeEvent();
     [HideInInspector] public static OnSomeEvent RestartButtonPressed;
@@ -54,6 +56,8 @@ public class PlayerMain : MonoBehaviour
 
             if(Input.GetKeyDown("space")) 
                 Jump();
+
+            SetPlayerAnimation();
 
             VelocityDecay();
 
@@ -170,4 +174,81 @@ public class PlayerMain : MonoBehaviour
         this.gameObject.transform.position = location;
     }
 
+
+void SetPlayerAnimation()
+    {
+        
+        animator.SetFloat("_velocityY", _moveXY[1]);
+        animator.SetFloat("_velocityX", Mathf.Abs(_moveXY[0]));
+
+        if(_moveXY[1] != 0f)
+        {    
+            animator.SetBool("_isAirborne", true);
+            if(_moveXY[1] > 0)
+            {
+                animator.SetBool("_isMovingUp", true);
+                animator.SetBool("_isMovingDown", false);
+            }
+            else
+            {
+                animator.SetBool("_isMovingUp", false);
+                animator.SetBool("_isMovingDown", true);
+            }
+        }
+        else
+        {    
+            animator.SetBool("_isAirborne", false);
+            animator.SetBool("_isMovingUp", false);
+            animator.SetBool("_isMovingDown", false);
+        }
+        
+        if(_moveXY[0] != 0f)
+        {
+            _isMovingSideways = true;
+            animator.SetBool("_isMovingSideways", true);
+        }
+        else
+        {
+            _isMovingSideways = false;
+            animator.SetBool("_isMovingSideways", false);
+        }
+        if(_moveXY[0] >= 0f)
+        {    
+            _isFacingRight = true;
+            animator.SetBool("_isFacingRight", true);
+        }
+        else
+        {    
+            _isFacingRight = false;
+            animator.SetBool("_isFacingRight", false);
+        }
+        
+        
+        if(_isMovingSideways)
+        {    
+            // animator.SetBool("_isMoving", true);
+            if(_moveXY[0] > 0f && !_isFacingRight && _isMovingSideways)
+                    FlipSprite(); 
+            else if(_moveXY[0] < 0f && _isFacingRight && _isMovingSideways) 
+                    FlipSprite();
+        }
+        // else
+        //     animator.SetBool("_isMoving", false);
+
+        // if(!_isMovingSideways && !_isMovingVertical)
+        //     animator.SetBool("_isIdle", true);
+        // else
+        //     animator.SetBool("_isIdle", false);
+
+
+        
+    }
+
+    void FlipSprite()
+    {
+        _isFacingRight = !_isFacingRight;
+        Vector3 theScale = transform.localScale;
+        theScale.x *= -1;
+        transform.localScale = theScale;
+    }
 }

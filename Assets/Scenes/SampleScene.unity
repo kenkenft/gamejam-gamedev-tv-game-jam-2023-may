@@ -3196,6 +3196,31 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &149409499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4421046224150471586, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+  m_PrefabInstance: {fileID: 246684608448218541}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &149409505
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 149409499}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a077c2e4c53d85e49a292da9f91f9ea2, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!1001 &169790436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -32523,6 +32548,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4406522395545647594, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: -1482313902, guid: daaa12ab907f80647a880c547b199d01, type: 3}
     - target: {fileID: 4421046224150471586, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
       propertyPath: m_Name
       value: Player
@@ -32531,6 +32560,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 149409505}
     - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
       propertyPath: _playerJump
       value: 7
@@ -32546,6 +32579,18 @@ PrefabInstance:
     - target: {fileID: 4589919386316722281, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
       propertyPath: GroundLayerMask.m_Bits
       value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720681283332808252, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: m_Size.y
+      value: 2.11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720681283332808252, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4720681283332808252, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 2.375
       objectReference: {fileID: 0}
     - target: {fileID: 4775661858566513397, guid: f45478dd1f4900d4d93f06b74d0f49ee, type: 3}
       propertyPath: m_Material
