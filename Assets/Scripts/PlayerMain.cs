@@ -212,36 +212,26 @@ void SetPlayerAnimation()
             _isMovingSideways = false;
             animator.SetBool("_isMovingSideways", false);
         }
+
         if(_moveXY[0] >= 0f)
         {    
-            _isFacingRight = true;
+            // _isFacingRight = true;
             animator.SetBool("_isFacingRight", true);
         }
         else
         {    
-            _isFacingRight = false;
+            // _isFacingRight = false;
             animator.SetBool("_isFacingRight", false);
         }
         
         
         if(_isMovingSideways)
         {    
-            // animator.SetBool("_isMoving", true);
             if(_moveXY[0] > 0f && !_isFacingRight && _isMovingSideways)
                     FlipSprite(); 
             else if(_moveXY[0] < 0f && _isFacingRight && _isMovingSideways) 
                     FlipSprite();
-        }
-        // else
-        //     animator.SetBool("_isMoving", false);
-
-        // if(!_isMovingSideways && !_isMovingVertical)
-        //     animator.SetBool("_isIdle", true);
-        // else
-        //     animator.SetBool("_isIdle", false);
-
-
-        
+        }    
     }
 
     void FlipSprite()

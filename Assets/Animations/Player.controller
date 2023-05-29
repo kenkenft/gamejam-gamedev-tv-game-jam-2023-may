@@ -192,9 +192,6 @@ AnimatorStateTransition:
   - m_ConditionMode: 3
     m_ConditionEvent: _velocityY
     m_EventTreshold: 0.1
-  - m_ConditionMode: 1
-    m_ConditionEvent: _isFacingRight
-    m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -6975051162545209170}
   m_Solo: 0
@@ -234,7 +231,7 @@ AnimatorStateTransition:
   m_ExitTime: 0
   m_HasExitTime: 0
   m_HasFixedDuration: 0
-  m_InterruptionSource: 0
+  m_InterruptionSource: 3
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
 --- !u!1102 &3070497522769435044
@@ -272,9 +269,6 @@ AnimatorStateTransition:
   m_PrefabAsset: {fileID: 0}
   m_Name: 
   m_Conditions:
-  - m_ConditionMode: 1
-    m_ConditionEvent: _isAirborne
-    m_EventTreshold: 0
   - m_ConditionMode: 3
     m_ConditionEvent: _velocityY
     m_EventTreshold: 0.1
