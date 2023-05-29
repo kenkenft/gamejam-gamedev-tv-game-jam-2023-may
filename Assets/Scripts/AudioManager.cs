@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
         PlayerMain.PlaySFX += PlaySound;
         UIManager.PlaySFX += PlaySound;
         DimensionSwitch.PlaySFX += PlaySound;
+        DimensionSwitch.BGMChangeRequested += SwitchBGM;
         WaterCurrent.PlaySFX += PlaySound;
     }
 
@@ -23,6 +24,7 @@ public class AudioManager : MonoBehaviour
         PlayerMain.PlaySFX -= PlaySound;
         UIManager.PlaySFX -= PlaySound;
         DimensionSwitch.PlaySFX -= PlaySound;
+        DimensionSwitch.BGMChangeRequested -= SwitchBGM;
         WaterCurrent.PlaySFX -= PlaySound;
     }
 
@@ -48,14 +50,43 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        PlaySound("ThemeA");
-    }
 
     public void PlaySound(string name)
     {
         Sound s = Array.Find(sounds, sound => sound.name == name);
         s.source.Play();
+    }
+
+    public void StopSound(string name)
+    {
+        Sound s = Array.Find(sounds, sound => sound.name == name);
+        s.source.Stop();
+    }
+
+    public void SwitchBGM(int tilemapIndex)
+    {
+        Sound s;
+        float time;
+        
+        if(tilemapIndex == 0)
+        {
+            s = Array.Find(sounds, sound => sound.name == "ThemeB");
+            time = s.source.time; 
+            s = Array.Find(sounds, sound => sound.name == "ThemeA");
+            StopSound("ThemeB");
+        }
+        else
+        {
+            s = Array.Find(sounds, sound => sound.name == "ThemeA");
+            time = s.source.time; 
+            s = Array.Find(sounds, sound => sound.name == "ThemeB");
+            StopSound("ThemeA");
+        }
+
+        if(!s.source.isPlaying)
+        {    
+            s.source.time = time;
+            s.source.Play();
+        }
     }
 }

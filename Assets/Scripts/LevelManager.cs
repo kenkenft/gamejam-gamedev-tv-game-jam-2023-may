@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
     
     public void SwitchDimensions()
     {
-        Debug.Log("SwitchDimensions called!");
+        // Debug.Log("SwitchDimensions called!");
 
         if(_currentLevel == 0)
             TitleSwitchOccurred?.Invoke();
@@ -45,10 +45,7 @@ public class LevelManager : MonoBehaviour
 
     public void StartNextLevel()
     {
-        // Pseudo code: 
-        // Set up level layout
-        // 
-        Debug.Log("StartLevel called! Next Level: " + _currentLevel);
+        // Debug.Log("StartLevel called! Next Level: " + _currentLevel);
         ToggleActiveLevel();
         SetCameraSize(); 
         LevelObjects[_currentLevel].SetupLevel();

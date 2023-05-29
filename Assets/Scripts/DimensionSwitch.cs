@@ -11,23 +11,19 @@ public class DimensionSwitch : MonoBehaviour
 
     [HideInInspector] public delegate void SetPositionEvent(Vector3 position);
     [HideInInspector] public static SetPositionEvent LevelStarted; 
+    [HideInInspector] public delegate void SwitchBGM(int index);
+    [HideInInspector] public static SwitchBGM BGMChangeRequested;
 
     [HideInInspector] public delegate void OnPlaySFX(string audioName);
     [HideInInspector] public static OnPlaySFX PlaySFX;
 
-    // void OnEnable()
-    // {
-    //     _activeMapIndex = 0;
-    //     GroundTileMaps[0].SetActive(true);
-    //     GroundTileMaps[1].SetActive(false);
-    //     StartPos.GetComponent<SpriteRenderer>().enabled = ShowMarker;
-    // }
     
     public void ChangeLayout()
     {
-        Debug.Log("ChangeLayout called! " + gameObject.name);
+        // Debug.Log("ChangeLayout called! " + gameObject.name);
         ToggleTileMaps();
         PlaySFX?.Invoke("Switch");
+        BGMChangeRequested?.Invoke(_activeMapIndex);
     }
 
     void ToggleTileMaps()
@@ -60,5 +56,6 @@ public class DimensionSwitch : MonoBehaviour
         GroundTileMaps[1].SetActive(false);
         StartPos.GetComponent<SpriteRenderer>().enabled = ShowMarker;
         LevelStarted?.Invoke(StartPos.transform.position);
+        BGMChangeRequested?.Invoke(_activeMapIndex);
     } 
 }

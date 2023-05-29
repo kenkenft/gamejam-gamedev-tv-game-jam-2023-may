@@ -7216,7 +7216,13 @@ MonoBehaviour:
     pitch: 1
     loop: 0
   - name: ThemeA
-    clip: {fileID: 8300000, guid: ccf82dcf75cd9e149acff9ff2ef245a5, type: 3}
+    clip: {fileID: 8300000, guid: df40d1c667362d4429a3b8470b40c557, type: 3}
+    source: {fileID: 0}
+    volume: 2
+    pitch: 1
+    loop: 1
+  - name: ThemeB
+    clip: {fileID: 8300000, guid: cd459bf2ed33b3649891a774bb996df2, type: 3}
     source: {fileID: 0}
     volume: 2
     pitch: 1
