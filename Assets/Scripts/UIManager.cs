@@ -141,7 +141,7 @@ public class UIManager : MonoBehaviour
 
         NextLevelRequested?.Invoke();
 
-        PlaySFX?.Invoke("Start");
+        // PlaySFX?.Invoke("Start");
     }
 
     public void TogglePauseGame()
@@ -151,14 +151,12 @@ public class UIManager : MonoBehaviour
                 _pauseCanvas.gameObject.SetActive(true);
                 Time.timeScale = 0;
                 _isPaused = true;
-                // PlaySFX?.Invoke("coinPickup");
             }
             else
             {
                 _pauseCanvas.gameObject.SetActive(false);
                 Time.timeScale = 1;
                 _isPaused = false;
-                // PlaySFX?.Invoke("coinPickup");
             }
     }
 
@@ -174,30 +172,26 @@ public class UIManager : MonoBehaviour
     
     public void TriggerEndLevel()
     {
-        Debug.Log("TriggerEndLevel called");
+        // Debug.Log("TriggerEndLevel called");
         string[] colorTag = {"<color=#000000>", "<color=#ffffff>", "<color=#ffffff>"};
-        ToggleCanvas("ResultsCanvas");
-        _isPlaying = false;
+        // ToggleCanvas("ResultsCanvas");
+        
         
         if(IsFinalLevelRequested.Invoke())
-            PlaySFX?.Invoke("FinalLevelComplete");
+        {
+            _isPlaying = false;
+            ToggleCanvas("ResultsCanvas");
+            // PlaySFX?.Invoke("FinalLevelComplete");
+        }                
         else
-            PlaySFX?.Invoke("LevelComplete");
-        // ResultsPanelImage.sprite = _endResultImages[colorTagIndex];
-        // _resultsUITextArray[0].text = colorTag[colorTagIndex] + tempString + "</color>";
-        // _resultsUITextArray[1].text = colorTag[colorTagIndex] + results + "</color>";
-        // _resultsUITextArray[2].text = colorTag[colorTagIndex] + _resultsUITextArray[2].text.ToString() + "</color>";
-        // _resultsUITextArray[3].text = colorTag[colorTagIndex] + _resultsUITextArray[3].text.ToString() + "</color>";
-        // _resultsUITextArray[4].text = colorTag[colorTagIndex] + _resultsUITextArray[4].text.ToString() + "</color>";
-        // _resultsUITextArray[5].text = colorTag[colorTagIndex] + _resultsUITextArray[5].text.ToString() + "</color>";
-        // _resultsUITextArray[6].text = colorTag[colorTagIndex] + _resultsUITextArray[6].text.ToString() + "</color>";
+        {
+            ContinueToNextLevel();
+            // PlaySFX?.Invoke("LevelComplete");
+        }
+        
 
     }
 
-    // public void ContinueToNextLevel()
-    // {
-    //     NextLevelRequested?.Invoke();
-    // }
 
     public void TriggerTitleCanvas()
     {

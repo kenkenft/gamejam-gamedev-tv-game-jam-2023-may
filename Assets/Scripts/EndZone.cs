@@ -32,12 +32,13 @@ public class EndZone : MonoBehaviour
 
     public void TriggerEndLevel()
     {
-        Debug.Log("End zone entered!");
-        EndZoneEntered?.Invoke();
+        // Debug.Log("End zone entered!");
+        
         if(!IsFinalLevel)
             LevelCompleted?.Invoke(NextLevel);
         else
             LevelCompleted?.Invoke(0);
+        EndZoneEntered?.Invoke();
     }
 
     void OnTriggerEnter2D(Collider2D col)
