@@ -35,7 +35,7 @@ public class WaterCurrent : MonoBehaviour
         {  
             if(this.gameObject.tag != null)
             {   
-                Debug.Log("Tag: " + this.gameObject.tag); 
+                // Debug.Log("Tag: " + this.gameObject.tag); 
                 PlaySFX?.Invoke(this.gameObject.tag);}
         }
     }

@@ -16,16 +16,18 @@ public class LevelManager : MonoBehaviour
     {
         PlayerMain.DimensionButtonPressed += SwitchDimensions;
         EndZone.LevelCompleted += SetCurrentLevel;
+        // UIManager.LevelCompleted += SetCurrentLevel;
         UIManager.NextLevelRequested += StartNextLevel;
-        UIManager.IntValueRequested += GetCurrentLevel;
+        UIManager.LevelValueRequested += GetCurrentLevel;
     }
 
     void OnDisable()
     {
         PlayerMain.DimensionButtonPressed -= SwitchDimensions;
         EndZone.LevelCompleted -= SetCurrentLevel;
+        // UIManager.LevelCompleted -= SetCurrentLevel;
         UIManager.NextLevelRequested -= StartNextLevel;
-        UIManager.IntValueRequested -= GetCurrentLevel;
+        UIManager.LevelValueRequested -= GetCurrentLevel;
     }
     
     public void SwitchDimensions()
@@ -72,6 +74,6 @@ public class LevelManager : MonoBehaviour
         if(_currentLevel < CameraOrthSizes.Length)
             MainCamera.orthographicSize = CameraOrthSizes[_currentLevel];
         else
-            MainCamera.orthographicSize = 20f;
+            MainCamera.orthographicSize = 10f;
     }
 }

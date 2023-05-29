@@ -15,6 +15,8 @@ public class EndZone : MonoBehaviour
 
     [HideInInspector] public delegate void SetValueEvent(int value);
     [HideInInspector] public static SetValueEvent LevelCompleted;
+    [HideInInspector] public delegate void BoolValueSet(bool value);
+    [HideInInspector] public static BoolValueSet IsFinalLevelCompleted;
     
     void OnEnable()
     {
@@ -38,6 +40,7 @@ public class EndZone : MonoBehaviour
             LevelCompleted?.Invoke(NextLevel);
         else
             LevelCompleted?.Invoke(0);
+        IsFinalLevelCompleted?.Invoke(IsFinalLevel);
         EndZoneEntered?.Invoke();
     }
 
@@ -56,6 +59,10 @@ public class EndZone : MonoBehaviour
         }
     }
 
+    public int GetNextLevel()
+    {
+        return NextLevel;
+    }
     public bool GetIsFinalLevel()
     {
         return IsFinalLevel;

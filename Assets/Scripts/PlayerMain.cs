@@ -93,12 +93,12 @@ public class PlayerMain : MonoBehaviour
         Ray2D[] jumpRays = CreateRays();
         foreach(Ray2D ray in jumpRays)
         {
-            Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
+            // Debug.DrawRay(ray.origin, ray.direction, Color.green, 5f);
             RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, _maskY[1], GroundLayerMask);
             
             if (hit.collider != null) 
             {    
-                Debug.Log(hit.collider.gameObject.name);
+                // Debug.Log(hit.collider.gameObject.name);
                 return true;
             }
         }
@@ -152,7 +152,7 @@ public class PlayerMain : MonoBehaviour
         // // }
         foreach(ContactPoint2D point in contact)
             {
-                Debug.Log(point.normal);
+                // Debug.Log(point.normal);
                 if(point.normal == Vector2.up)   
                 {    
                     PlaySFX?.Invoke("Landed");

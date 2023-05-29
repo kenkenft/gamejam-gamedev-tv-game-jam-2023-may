@@ -11,7 +11,7 @@ public class UIManager : MonoBehaviour
     private List<Canvas> _canvasList = new List<Canvas>();
     public Image ResultsPanelImage;
 
-    [SerializeField] bool _isPlaying = false, _isPaused = false;
+    [SerializeField] bool _isPlaying = false, _isPaused = false, _isFinalLevelCompleted = false;
 
     private Sprite[] _endResultImages;
 
@@ -24,7 +24,9 @@ public class UIManager : MonoBehaviour
     [HideInInspector] public static OnSomeEvent NextLevelRequested;
 
     [HideInInspector] public delegate int IntValueGet();
-    [HideInInspector] public static IntValueGet IntValueRequested;
+    [HideInInspector] public static IntValueGet LevelValueRequested;
+    [HideInInspector] public delegate void SetValueEvent(int value);
+    [HideInInspector] public static SetValueEvent LevelCompleted;
     [HideInInspector] public delegate bool BoolValueGet();
     [HideInInspector] public static BoolValueGet IsFinalLevelRequested;
     [HideInInspector] public delegate void OnPlaySFX(string audioName);
@@ -35,6 +37,7 @@ public class UIManager : MonoBehaviour
         PlayerMain.RestartButtonPressed += ContinueToNextLevel;
         PlayerMain.CheckIsPlaying += GetIsPlaying;
         EndZone.EndZoneEntered += TriggerEndLevel;
+        EndZone.IsFinalLevelCompleted += SetIsFinalLevelCompleted;
         LevelManager.TitleSwitchOccurred += AdvanceInstructionText;
     }
     void Disable()
@@ -42,6 +45,7 @@ public class UIManager : MonoBehaviour
         PlayerMain.RestartButtonPressed -= ContinueToNextLevel;
         PlayerMain.CheckIsPlaying -= GetIsPlaying;
         EndZone.EndZoneEntered -= TriggerEndLevel;
+        EndZone.IsFinalLevelCompleted -= SetIsFinalLevelCompleted;
         LevelManager.TitleSwitchOccurred -= AdvanceInstructionText;
     }
 
@@ -132,7 +136,7 @@ public class UIManager : MonoBehaviour
         _isPlaying = true;
 
         // Debug.Log("Play button pressed!");
-        if(IntValueRequested.Invoke() != 0)
+        if(LevelValueRequested.Invoke() != 0)
             ToggleCanvas("PlayerOverlayCanvas");
         else
             TriggerTitleCanvas();
@@ -173,18 +177,21 @@ public class UIManager : MonoBehaviour
     public void TriggerEndLevel()
     {
         // Debug.Log("TriggerEndLevel called");
-        string[] colorTag = {"<color=#000000>", "<color=#ffffff>", "<color=#ffffff>"};
         // ToggleCanvas("ResultsCanvas");
-        
-        
-        if(IsFinalLevelRequested.Invoke())
+        // Debug.Log("LevelValueRequested before IsFinal Check: " + LevelValueRequested.Invoke());
+        // Debug.Log("IsFinalLevelRequested.Invoke(): " + IsFinalLevelRequested.Invoke());
+        // if(IsFinalLevelRequested.Invoke())
+        if(_isFinalLevelCompleted)
         {
             _isPlaying = false;
             ToggleCanvas("ResultsCanvas");
+            // LevelCompleted?.Invoke(0);
             // PlaySFX?.Invoke("FinalLevelComplete");
         }                
         else
         {
+            // Debug.Log("LevelValueRequested.Invoke(): " + LevelValueRequested.Invoke());
+            // LevelCompleted?.Invoke(LevelValueRequested.Invoke());
             ContinueToNextLevel();
             // PlaySFX?.Invoke("LevelComplete");
         }
@@ -201,6 +208,11 @@ public class UIManager : MonoBehaviour
         _textIndexPointer = 0;
         AdvanceInstructionText();
         // PlaySFX?.Invoke("coinPickup");
+    }
+
+    void SetIsFinalLevelCompleted(bool state)
+    {
+        _isFinalLevelCompleted = state;
     }
 
 }
